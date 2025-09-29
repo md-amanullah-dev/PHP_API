@@ -9,10 +9,10 @@ function userRoute($pdo, $uri) {
             $controller->getUsers();
             return true;
 
-        // case '/addUser':
-        //     $controller = new AddUserController($pdo);
-        //     $controller->handle();
-        //     return true;
+        case '/addUser':
+            $controller = new userController($pdo);
+            $controller->addUsers();
+            return true;
     }
     return false;
 }

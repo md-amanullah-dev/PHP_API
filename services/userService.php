@@ -14,4 +14,10 @@ class UserService
     {
         return $this->userModel->getAllUsers();
     }
+
+
+    public function addUsers($data)
+    {
+        return $this->userModel->addUsers($data);
+    }
 }
