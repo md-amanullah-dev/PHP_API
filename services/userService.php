@@ -10,9 +10,15 @@ class UserService
         $this->userModel = new User($pdo);
     }
 
-    public function fetchUsers()
+    public function fetchUsers($search, $startDate, $endDate)
     {
-        return $this->userModel->getAllUsers();
+        return $this->userModel->getAllUsers($search, $startDate, $endDate);
+    }
+
+
+    public function userDetails($userId)
+    {
+        return $this->userModel->userDetails($userId);
     }
 
 

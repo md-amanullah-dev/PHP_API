@@ -9,6 +9,11 @@ function userRoute($pdo, $uri) {
             $controller->getUsers();
             return true;
 
+            case '/userDetails':
+                $controller = new userController($pdo);
+                $controller->userDetails();
+                return true;
+
         case '/addUser':
             $controller = new userController($pdo);
             $controller->addUsers();

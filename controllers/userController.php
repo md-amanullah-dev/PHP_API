@@ -11,13 +11,54 @@ class UserController
     }
 
     public function getUsers()
+
+
     {
         header('Content-Type: application/json');
-        $users = $this->userService->fetchUsers();
+
+
+        // Frontend se aaye hue search & date filter
+        $search = $_GET['search'] ?? null;
+        $startDate = $_GET['startDate'] ?? null;
+        $endDate = $_GET['endDate'] ?? null;
+
+        $users = $this->userService->fetchUsers($search, $startDate, $endDate);
 
         echo json_encode([
             "status" => "success",
             "data" => $users
+        ]);
+    }
+
+
+    
+    public function userDetails()
+
+
+    {
+        header('Content-Type: application/json');
+
+
+        // Frontend se aaye hue search & date filter
+        $userId = $_GET['userId'];
+
+        if ($userId === null || !is_numeric($userId)) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Missing or invalid userId"]);
+            return;
+        }
+
+        $user = $this->userService->userDetails($userId);
+
+        if (!$user) {
+            http_response_code(404);
+            echo json_encode(["status" => "error", "message" => "User not found"]);
+            return;
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "data" => $user
         ]);
     }
 
